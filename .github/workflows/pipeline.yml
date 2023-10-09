@@ -26,7 +26,7 @@ jobs:
       run: Add-Content -Path ${env:GITHUB_ENV} "`nprojectName=$(${env:GITHUB_REPOSITORY}.substring(${env:GITHUB_REPOSITORY}.IndexOf('/') + 1))" -Encoding utf8
 
     - name: Pack
-      run: dotnet pack "./${{ env.projectName }}/${{ env.projectName }}.csproj" -c Release
+      run: dotnet pack "./${{ env.projectName }}/${{ env.projectName }}.csproj" -c Release -p:GeneratePackageOnBuild=false
 
     - name: Push to nuget.org
       run: nuget push "./**/${{ env.projectName }}.*.nupkg" -ApiKey ${{ secrets.NUGET_APIKEY }} -source https://api.nuget.org/v3/index.json
