@@ -13,13 +13,17 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Setup dotnet v2.0
+    - name: Setup dotnet v6.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '2.0.x' # SDK Version to use
+        dotnet-version: '6.0.x' # SDK Version to use
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
+
+    - name: Resolve project name
+      shell: pwsh
+      run: Add-Content -Path ${env:GITHUB_ENV} "`nprojectName=$(${env:GITHUB_REPOSITORY}.substring(${env:GITHUB_REPOSITORY}.IndexOf('/') + 1))" -Encoding utf8
 
     - name: Pack
       run: dotnet pack "./${{ env.projectName }}/${{ env.projectName }}.csproj" -c Release
