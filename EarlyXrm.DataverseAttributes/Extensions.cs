@@ -1,4 +1,4 @@
-﻿namespace DataverseAttributes;
+﻿namespace EarlyXrm.DataverseAttributes;
 
 using System;
 using System.Collections.Generic;

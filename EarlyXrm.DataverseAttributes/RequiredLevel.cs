@@ -1,4 +1,4 @@
-﻿namespace DataverseAttributes;
+﻿namespace EarlyXrm.DataverseAttributes;
 
 public enum RequiredLevel
 {
