@@ -37,6 +37,8 @@ public class DataverseColumnAttribute : DataverseAttribute
     public RequiredLevel RequiredLevel { get; set; } = RequiredLevel.None;
 
     public bool Multiline { get; set; } = false;
+    public bool IsFile { get; set; } = false;
+    public bool IsImage { get; set;} = false;
     public bool IncludeTime { get; set; } = false;
     public bool IsGlobal { get; set; } = true;
     public bool BoolDefault { get; set; } = false;
