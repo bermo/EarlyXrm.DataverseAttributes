@@ -13,6 +13,17 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.7
+      with:
+          versionSpec: '5.x'
+          useConfigFile: true
+          configFilePath: ./GitVersion.yml
+
+    - name: Use GitVersion
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v0.9.7
+
     - name: Setup dotnet v6.0
       uses: actions/setup-dotnet@v1
       with:
@@ -26,7 +37,7 @@ jobs:
       run: Add-Content -Path ${env:GITHUB_ENV} "`nprojectName=$(${env:GITHUB_REPOSITORY}.substring(${env:GITHUB_REPOSITORY}.IndexOf('/') + 1))" -Encoding utf8
 
     - name: Pack
-      run: dotnet pack "./${{ env.projectName }}/${{ env.projectName }}.csproj" -c Release -p:GeneratePackageOnBuild=false
+      run: dotnet pack "./${{ env.projectName }}/${{ env.projectName }}.csproj" -c Release -p:GeneratePackageOnBuild=false -p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }}
 
     - name: Push to nuget.org
       run: nuget push "./**/${{ env.projectName }}.*.nupkg" -ApiKey ${{ secrets.NUGET_APIKEY }} -source https://api.nuget.org/v3/index.json

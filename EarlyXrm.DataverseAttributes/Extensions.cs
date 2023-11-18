@@ -1,13 +1,10 @@
 ﻿namespace EarlyXrm.DataverseAttributes;
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 internal static class Extensions
 {
-    public static string GetDisplayName(this string input)
+    public static string? GetDisplayName(this string? input)
     {
         if (input == null) return null;
 

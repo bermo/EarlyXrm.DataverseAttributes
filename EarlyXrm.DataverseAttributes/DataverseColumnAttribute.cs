@@ -10,9 +10,9 @@ public class DataverseColumnAttribute : DataverseAttribute
 {
     public bool Hide { get; set; } = false;
 
-    public string RelationshipSchemaName { get; set; }
-    public string LookupSchemaName { get; set; }
-    public string LookupDisplayName { get; set; }
+    public string? RelationshipSchemaName { get; set; }
+    public string? LookupSchemaName { get; set; }
+    public string? LookupDisplayName { get; set; }
 
     public string Tab { get; set; } = "";
     public string Section { get; set; } = "";
@@ -21,6 +21,7 @@ public class DataverseColumnAttribute : DataverseAttribute
     public int SectionWidth { get; set; } = 0;
 
     public bool IsCalculated { get; set; }
+    public string? Formula { get; set; }
     public bool IsPrimary { get; set; }
     public bool ReadOnly { get; set; }
     public int Row { get; set; } = int.MaxValue;
@@ -43,7 +44,7 @@ public class DataverseColumnAttribute : DataverseAttribute
     public bool IsGlobal { get; set; } = true;
     public bool BoolDefault { get; set; } = false;
     public bool IsEmail { get; set; } = false;
-    public string Autonumber { get; set; }
+    public string? Autonumber { get; set; }
 
     public bool Collapsed { get; set; } = false;
 
@@ -59,12 +60,12 @@ public class DataverseColumnAttribute : DataverseAttribute
 
     public bool IsEnum
     {
-        get => UnderlyingType.IsEnum;
+        get => UnderlyingType?.IsEnum == true;
     }
 
     public bool IsMultiEnum
     {
-        get => PropertyInfo.PropertyType.IsGenericType && PropertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(List<>) &&
+        get => PropertyInfo?.PropertyType.IsGenericType == true && PropertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(List<>) &&
                 PropertyInfo.PropertyType.GetGenericArguments().First().IsEnum;
     }
 
@@ -79,12 +80,12 @@ public class DataverseColumnAttribute : DataverseAttribute
         }
     }
 
-    public bool IsCustom { get { return LogicalName.StartsWith(Prefix); } }
+    public bool IsCustom { get { return LogicalName?.StartsWith(Prefix) ?? false; } }
     public bool IsCustomRelationship
     {
         get
         {
-            if (RelationshipSchemaName.Contains("Annotation"))
+            if (RelationshipSchemaName?.Contains("Annotation") != false)
                 return false;
 
             return RelationshipSchemaName.StartsWith(Prefix);
@@ -95,27 +96,27 @@ public class DataverseColumnAttribute : DataverseAttribute
     public bool IsManyToOne { get; internal set; }
 
     public bool IsManyToMany { get; set; }
-    public Type[] M2MTypes { get; internal set; }
-    public string IntersectEntity { get; set; }
+    public Type[]? M2MTypes { get; internal set; }
+    public string? IntersectEntity { get; set; }
 
     public bool IsSimple { get; internal set; }
 
-    public Type UnderlyingType { get; internal set; }
-    public PropertyInfo PropertyInfo { get; internal set; }
+    public Type? UnderlyingType { get; internal set; }
+    public PropertyInfo? PropertyInfo { get; internal set; }
 
-    public string ViewName { get; set; }
-    public string[] View { get; set; }
-    public int[] ViewWidth { get; set; }
-    public string ViewOrder { get; set; }
+    public string? ViewName { get; set; }
+    public string[]? View { get; set; }
+    public int[]? ViewWidth { get; set; }
+    public string? ViewOrder { get; set; }
     public bool ViewAscending { get; set; } = false;
 
-    public string[] PrimarySegments { get; set; }
-    public string PrimaryDescription { get; set; }
+    public string[]? PrimarySegments { get; set; }
+    public string? PrimaryDescription { get; set; }
 
     public bool IsParental { get; set; }
 
-    public string FilterParent { get; set; }
-    public string FilterField { get; set; }
+    public string? FilterParent { get; set; }
+    public string? FilterField { get; set; }
 
-    public string[] Ancestors { get; set; }
+    public string[]? Ancestors { get; set; }
 }

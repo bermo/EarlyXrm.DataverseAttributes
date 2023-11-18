@@ -7,15 +7,15 @@ using System.Reflection;
 
 public static class DataverseSolution
 {
-    public static string Prefix = null;
-    public static string Solution = null;
+    public static string? Prefix = null;
+    public static string? Solution = null;
 
     public static DataverseTableAttribute DataverseTable(this Type type)
     {
         var entity = type.GetCustomAttribute<DataverseTableAttribute>() ?? new DataverseTableAttribute();
 
-        if (entity.Prefix == null) entity.Prefix = Prefix;
-        if (entity.Solution == null) entity.Solution = Solution;
+        if (entity.Prefix == null && Prefix != null) entity.Prefix = Prefix;
+        if (entity.Solution == null && Solution != null) entity.Solution = Solution;
 
         if (entity.Name == null) entity.Name = type.Name;
         if (entity.DisplayName == null) entity.DisplayName = entity.Name.GetDisplayName();
@@ -52,8 +52,8 @@ public static class DataverseSolution
 
         field.PropertyInfo = propertyInfo;
 
-        if (field.Prefix == null) field.Prefix = Prefix;
-        if (field.Solution == null) field.Solution = Solution;
+        if (field.Prefix == null && Prefix != null) field.Prefix = Prefix;
+        if (field.Solution == null && Solution != null) field.Solution = Solution;
 
         if (field.Name == null) field.Name = propertyInfo.Name;
         if (field.DisplayName == null)
