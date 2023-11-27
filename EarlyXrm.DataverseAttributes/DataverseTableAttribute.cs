@@ -2,7 +2,7 @@
 
 using System;
 
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum, AllowMultiple = false)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false)]
 public class DataverseTableAttribute : DataverseAttribute
 {
     public string? DisplayCollectionName { get; set; }

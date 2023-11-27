@@ -31,9 +31,9 @@ public class DataverseColumnAttribute : DataverseAttribute
     public int ColumnSpan { get; set; } = 1;
     public bool ShowGridLabel { get; set; } = false;
     public int MaxLength { get; set; } = 200;
-    public int? MinValue { get; set; }
-    public int? MaxValue { get; set; }
-    public int? Precision { get; set; }
+    public int MinValue { get; set; } = 0;
+    public int MaxValue { get; set; } = 0;
+    public int Precision { get; set; } = 0;
 
     public RequiredLevel RequiredLevel { get; set; } = RequiredLevel.None;
 
